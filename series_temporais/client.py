@@ -1,5 +1,3 @@
-#https://www.influxdata.com/blog/getting-started-python-influxdb/
-
 from influxdb import InfluxDBClient
 
 username=''
@@ -15,8 +13,8 @@ client.create_database('exemplo')
 client.switch_database('exemplo')
 
 ''' Pontos de uma 'escova de dentes inteligente'. 
-Cada ponto representa um 'evento de limpeza', cada um deles começando por volta de 8 da manhã,
-idetificados com a tag da pessoa e do id da escova, bem como o tempo (em segundos) que a limpeza durou '''
+Cada ponto representa um 'evento de limpeza', com cada um deles começando por volta de 8 da manhã,
+identificados com a tag da pessoa e do id da escova, bem como o tempo (em segundos) que a limpeza durou '''
 json_body = [
     {
         "measurement": "brushEvents",
@@ -56,8 +54,15 @@ json_body = [
 ''' Inserindo os pontos'''
 client.write_points(json_body)
 
-''' Selecionando'''
-#results=client.query('SELECT "duration" FROM "exemplo"."autogen"."brushEvents" WHERE time > now() - 4d GROUP BY "user"')
-results=client.query('SELECT "duration" FROM "exemplo"."autogen"."brushEvents"  GROUP BY "user"')
+''' Selecionando o tempo da limpeza nos últimos 4 dias'''
+results=client.query('SELECT "duration" FROM "exemplo"."autogen"."brushEvents" WHERE time > now() - 4d GROUP BY "user"')
+
 ''' Imprimindo o resultado'''
 print(results.raw)
+
+
+'''Selecionando os dados de um usuário em específico'''
+points = results.get_points(tags={'user':'Carol'})
+'''Iterando o resultado'''
+for point in points:
+    print(f"Tempo: {point['time']}, Duração: {point['duration']}")

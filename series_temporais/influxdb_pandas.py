@@ -10,8 +10,8 @@ from influxdb import DataFrameClient
 def main(host='localhost', port=8086):
     """Instantiate the connection to the InfluxDB client."""
     user = 'admin'
-    password = '123'
-    dbname = 'xpto'
+    password = ''
+    dbname = ''
     protocol = 'line'
 
     client = DataFrameClient(host, port, user, password, dbname)
@@ -34,24 +34,21 @@ def main(host='localhost', port=8086):
     print("Read DataFrame")
     client.query("select * from demo")
 
-    print("Delete database: " + dbname)
+    #print("Delete database: " + dbname)
     #client.drop_database(dbname)
 
 
 def parse_args():
-    """Parse the args from main."""
     parser = argparse.ArgumentParser(
-        description='example code to play with InfluxDB')
+        description='código a rodar com InfluxDB')
     parser.add_argument('--host', type=str, required=False,
                         default='localhost',
-                        help='hostname of InfluxDB http API')
-    parser.add_argument('--port', type=int, required=False, default=8086,
-                        help='port of InfluxDB http API')
+                        help='nome do host da API http do InfluxDB')
+    parser.add_argument('--porta', type=int, required=False, default=8086,
+                        help='porta da API http do InfluxDB')
     return parser.parse_args()
 
 
 if __name__ == '__main__':
     args = parse_args()
-    host='localhost'
-    port=8086
     main()
