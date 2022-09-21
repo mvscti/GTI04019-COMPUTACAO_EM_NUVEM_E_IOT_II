@@ -1,15 +1,14 @@
 [GENERAL]
-Delay = 20
-Output = False
+
 
 [OPENWEATHER]
-Key=e8c81c89a3e027ffad2b98f7d42cfc31
+Key=
 
 [INFLUXDB]
 Endereco = localhost
 Porta = 8086
 DB = openweather
-Username = admin
-Senha = 123
+Username = 
+Senha = 
 
 
