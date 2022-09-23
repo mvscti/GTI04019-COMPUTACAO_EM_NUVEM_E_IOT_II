@@ -40,6 +40,7 @@ def formataDadosProtocoloLinha(data, city_data):
                 "main_humidity":data['main.humidity'],
                 "main_temp_min":data['main.temp_min'],
                 "main_temp_max":data['main.temp_max'],
+                "feels_like": data['main.feels_like'],
                 "visibility":data['visibility'],
                 "wind_speed":data['wind.speed'],
                 "wind_deg":data['wind.deg'],
