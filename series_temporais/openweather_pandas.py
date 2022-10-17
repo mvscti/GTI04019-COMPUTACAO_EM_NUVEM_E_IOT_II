@@ -13,8 +13,6 @@ username=config['INFLUXDB']['Username']
 senha=config['INFLUXDB']['Senha']
 dbname=config['INFLUXDB']['DB']
 openWeatherMap_token = config['OPENWEATHER']['Key']
-openWeatherMap_lat = "33.44"
-openWeatherMap_lon = "-94.04"
 openWeather_url = "https://api.openweathermap.org/data/2.5/forecast"
 
 
@@ -42,6 +40,7 @@ def formataDadosProtocoloLinha(data, city_data):
                 "main_humidity":data['main.humidity'],
                 "main_temp_min":data['main.temp_min'],
                 "main_temp_max":data['main.temp_max'],
+                "feels_like": data['main.feels_like'],
                 "visibility":data['visibility'],
                 "wind_speed":data['wind.speed'],
                 "wind_deg":data['wind.deg'],
@@ -55,7 +54,7 @@ def formataDadosProtocoloLinha(data, city_data):
 def main():
    loc=defineLocalizacao()
    # Recebe dados de séries temporais da API do OpenWeather 
-   params = {'lat':loc[0], 'lon':loc[1], 'exclude': "minutely,current,alerts", 'appid':openWeatherMap_token}
+   params = {'lat':loc[0], 'lon':loc[1], 'units':'metric', 'exclude': "minutely,current,alerts", 'appid':openWeatherMap_token}
    print("Consultando a API do OpenWeather")
    r = requests.get(openWeather_url, params = params).json()
 
