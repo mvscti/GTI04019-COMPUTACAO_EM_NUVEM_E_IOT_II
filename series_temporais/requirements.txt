@@ -1,2 +1,2 @@
-influxdb==5.3.1
-pandas==1.0.5
+influxdb
+pandas
