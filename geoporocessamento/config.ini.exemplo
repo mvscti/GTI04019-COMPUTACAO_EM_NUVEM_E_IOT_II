@@ -1,0 +1,15 @@
+#É necessário renomear este arquivo para config.ini 
+[GENERAL]
+
+
+[OPENWEATHER]
+Key=
+
+[INFLUXDB]
+Endereco = localhost
+Porta = 8086
+DB = openweather
+Username = 
+Senha = 
+
+
